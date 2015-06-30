@@ -47,7 +47,7 @@ public class Application extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Usuário");
+        jLabel1.setText("CPF");
 
         jLabel2.setText("Senha");
 
@@ -96,7 +96,9 @@ public class Application extends javax.swing.JFrame {
         Usuario u = Usuario.buscaUsuario(cpf);
         
         if (u != null && u.getSenha().equals(senha)) {
-            jLabel3.setText("Logado com sucesso");
+            formPrincipal fp = new formPrincipal();
+            this.setVisible(false);
+            fp.setVisible(true);
         } else {
             jLabel3.setText("usuário ou senha inválidos");
         }
