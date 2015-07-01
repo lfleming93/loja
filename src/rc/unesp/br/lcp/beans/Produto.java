@@ -9,13 +9,25 @@ package rc.unesp.br.lcp.beans;
  *
  * @author lfleming
  */
-public class Produto {
+public class Produto implements Entidade {
+    private int id;
     private String nome;
-    private String código;
+    private String codigo;
     private int quantidade;
     private String categoria;
-    private int valor;
+    private double valor;
+    
+    
+    @Override
+    public int getId() {
+        return this.id;
+    }
 
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -24,12 +36,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getCódigo() {
-        return código;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCódigo(String código) {
-        this.código = código;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public int getQuantidade() {
@@ -48,12 +60,11 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public int getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
-    
 }

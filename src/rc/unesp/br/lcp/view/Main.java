@@ -22,7 +22,7 @@ public class Main {
 
         final Application app = new Application();
         app.setTitle("Simple Java Database Swing Application");
-        app.setSize(800, 600);
+        app.setSize(400, 300);
         app.setLocationRelativeTo(null);
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setVisible(true);

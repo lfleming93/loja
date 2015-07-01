@@ -5,15 +5,11 @@
  */
 package rc.unesp.br.lcp.beans;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author lfleming
  */
-public class Usuario {
+public class Usuario implements Entidade {
     private int id;
     private String nome;
     private String email;
@@ -24,16 +20,21 @@ public class Usuario {
     private int tipo; // 0 para usuário normal, 1 para admin
     private String senha; 
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
     public String getSenha() {
-        return senha;
+        if (senha != null) 
+            return senha;
+        
+        return "";
     }
 
     public void setSenha(String senha) {
@@ -94,74 +95,5 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-    
-    public static Usuario buscaUsuario(String cpf) {
-        try {
-            DbHelper db = new DbHelper();
-            String select = "select * from usuarios where cpf='" + cpf + "'";
-            ResultSet rset = db.select(select);
-
-
-            if(rset.next()) {
-               return converteResultSetParaUsuario(rset);
-            }
-        }
-        catch(Exception ex) {            
-            ex.printStackTrace();
-        }
-        return null;
-    }
-    
-    public static List<Usuario> buscaUsuarios() {
-        List<Usuario> users = new ArrayList<Usuario>();
-        try {
-            DbHelper db = new DbHelper();
-            String select = "select * from usuarios";
-            ResultSet rset = db.select(select);
-
-
-            while(rset.next()) {
-               users.add(converteResultSetParaUsuario(rset));
-            }
-        }
-        catch(Exception ex) {            
-            ex.printStackTrace();
-        }
-        return users;
-        
-    }
-    
-    public static Usuario insereUsuario(Usuario u) {
-        String select = String.format("insert into usuarios " + 
-            "(nome, email, endereco, cpf, telefone, celular, tipo, senha)" +
-            " values ('"+ u.getNome() +"', '"+ u.getEmail() +"', '" + 
-            u.getEndereço() +"', '"+ u.getCpf() +"', '"+ u.getTelefone() +
-            "', '"+ u.getCelular() +"', "+ u.getTipo() +", '"+ u.getSenha() +"')");
-        
-        try {
-            DbHelper db = new DbHelper();
-            u.setId(db.insert(select));
-        }
-        catch(Exception ex) {            
-            ex.printStackTrace();
-        }
-        
-        return u;
-    }
-    
-    private static Usuario converteResultSetParaUsuario(ResultSet rs) throws Exception {
-        Usuario u = new Usuario();
-        u.setNome(rs.getString("nome"));
-        u.setEmail(rs.getString("email"));
-        u.setEndereço(rs.getString("endereco"));
-        u.setTelefone(rs.getString("telefone"));
-        u.setCelular(rs.getString("celular"));
-        u.setCpf(rs.getString("cpf"));
-        u.setTipo(rs.getInt("tipo"));
-        u.setSenha(rs.getString("senha")); 
-        
-        return u;
-        
     }
 }
