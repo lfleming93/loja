@@ -7,7 +7,10 @@ package rc.unesp.br.lcp.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import rc.unesp.br.lcp.beans.Venda;
+import rc.unesp.br.lcp.beans.VendaProduto;
 
 /**
  *
@@ -16,6 +19,32 @@ import rc.unesp.br.lcp.beans.Venda;
 public class VendaEntity extends IEntity<Venda> {
     public static String tableName = "produtos";
 
+  public VendaEntity() {
+    super(tableName);
+  }
+    
+    @Override
+    public Venda inserir(Venda v) {
+      Venda vendaSalva = super.inserir(v);
+      
+      VendaProdutoEntity vpEntity = new VendaProdutoEntity();
+      for (VendaProduto vp : v.getProdutos()) {
+        vendaSalva.setProduto(vpEntity.inserir(vp));
+      }
+      return vendaSalva;
+    }
+
+    @Override
+    public int atualizar(Venda v) {
+      int result = super.atualizar(v);
+      if (result != 0 ) {
+        VendaProdutoEntity vpEntity = new VendaProdutoEntity();
+        for (VendaProduto vp : v.getProdutos()) {
+          vpEntity.atualizar(vp);
+        }
+      }
+      return result;
+    }
         
     @Override
     protected Venda converterResultSet(ResultSet rs) {
