@@ -13,8 +13,8 @@ public class Usuario implements Entidade {
     private int id;
     private String nome;
     private String email;
-    private String endereço;
-    private String Telefone;
+    private String endereco;
+    private String telefone;
     private String celular;
     private String cpf;
     private int tipo; // 0 para usuário normal, 1 para admin
@@ -65,20 +65,20 @@ public class Usuario implements Entidade {
         this.email = email;
     }
 
-    public String getEndereço() {
-        return endereço;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getTelefone() {
-        return Telefone;
+        return telefone;
     }
 
     public void setTelefone(String Telefone) {
-        this.Telefone = Telefone;
+        this.telefone = Telefone;
     }
 
     public String getCelular() {

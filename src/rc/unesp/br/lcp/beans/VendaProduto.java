@@ -17,6 +17,8 @@ public class VendaProduto implements Entidade {
     private Produto produto;
     private Venda venda;
     private double valor;
+    private int produtoId;
+    private int vendaId;
     
     
     @Override
@@ -51,7 +53,12 @@ public class VendaProduto implements Entidade {
     }
     
     public Venda getVenda() {
-        return venda;
+        if (this.venda == null) {
+          VendaEntity ve = new VendaEntity();
+          this.venda = ve.buscarPorId(this.vendaId);
+        }
+          
+        return this.venda;
     }
 
     public void setVenda(Venda venda) {
@@ -64,30 +71,27 @@ public class VendaProduto implements Entidade {
     }
 
     public double getValor() {
-        if (valor == 0.0) {
-            valor = produto.getValor() * quantidade;
+        if (this.valor == 0.0) {
+            this.valor = this.produto.getValor() * quantidade;
         }
         
-        return valor;
-    }
-    
-        
-    public int getVendaId() {
-        int id = 0;
-        if (venda != null) {
-            id = venda.getId();
-        }
-        return id;
+        return this.valor;
     }
 
-        
-    public int getProdutoId() {
-        int id = 0;
-        if (produto != null) {
-            id = produto.getId();
-        }
-        return id;
-    }
+  public int getProdutoId() {
+    return produtoId;
+  }
 
+  public void setProdutoId(int produtoId) {
+    this.produtoId = produtoId;
+  }
+
+  public int getVendaId() {
+    return vendaId;
+  }
+
+  public void setVendaId(int vendaId) {
+    this.vendaId = vendaId;
+  }
        
 }

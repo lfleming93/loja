@@ -16,12 +16,13 @@ import rc.unesp.br.lcp.beans.Entidade;
  */
 abstract class IEntity<T extends Entidade> {
     
-    protected static String tableName;
+    protected String tableName;
     protected DbHelper db;
 
-    public IEntity() {
+    public IEntity(String table) {
+        this.tableName = table;
         try {
-            db = new DbHelper();
+            this.db = new DbHelper();
         }
         catch(Exception ex) {
             ex.printStackTrace();
@@ -71,7 +72,7 @@ abstract class IEntity<T extends Entidade> {
             "insert into %s %s", 
             tableName, converterEntidade(entidade)
         );
-            
+          
         try {
             int id = 0;
             id = db.insert(select);

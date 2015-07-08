@@ -17,6 +17,10 @@ public class ProdutoEntity extends IEntity<Produto> {
     
     public static String tableName = "produtos";
 
+  public ProdutoEntity() {
+    super(tableName);
+  }
+
         
     @Override
     protected Produto converterResultSet(ResultSet rs) {

@@ -16,6 +16,10 @@ import rc.unesp.br.lcp.beans.VendaProduto;
 public class VendaProdutoEntity extends IEntity<VendaProduto> {
     public static String tableName = "produtos";
 
+  public VendaProdutoEntity() {
+    super(tableName);
+  }
+
         
     @Override
     protected VendaProduto converterResultSet(ResultSet rs) {
@@ -24,7 +28,9 @@ public class VendaProdutoEntity extends IEntity<VendaProduto> {
             
             v.setId(rs.getInt("id"));
             
-            v.setVenda(rs.getInt("venda_id"));
+            v.setVendaId(rs.getInt("venda_id"));
+            
+            v.setProdutoId(rs.getInt("produto_id"));
 
             return v;
         }
