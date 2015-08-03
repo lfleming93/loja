@@ -5,6 +5,7 @@
  */
 package rc.unesp.br.lcp.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 import rc.unesp.br.lcp.database.UsuarioEntity;
 
@@ -15,6 +16,7 @@ import rc.unesp.br.lcp.database.UsuarioEntity;
 public class Venda implements Entidade {
     private int id;
     private Usuario cliente;
+    private int cliente_id;
     private List<VendaProduto> produtos;
     private float valor;
     
@@ -38,21 +40,30 @@ public class Venda implements Entidade {
         return valor;
     }
 
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+    
+    
+
     public Usuario getCliente() {
         return cliente;
     }
     
+    public void setClienteId(int id) {
+      this.cliente_id = id;
+    }
     
     public int getClienteId() {
-        int id = 0;
         if (cliente != null) {
-            id = cliente.getId();
+            cliente_id = cliente.getId();
         }
-        return id;
+        return cliente_id;
     }
 
     public void setCliente(Usuario cliente) {
         this.cliente = cliente;
+        this.cliente_id = cliente.getId();
     }
     
     public void setCliente(int id) {
@@ -65,6 +76,10 @@ public class Venda implements Entidade {
     }
 
     public void setProduto(VendaProduto produto) {
+        produto.setVendaId(this.getId());
+        if (this.produtos == null) {
+          this.produtos = new ArrayList<VendaProduto>();
+        }
         this.produtos.add(produto);
     }
     

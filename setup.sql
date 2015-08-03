@@ -41,7 +41,8 @@ create table venda_produtos (
     id int not null auto_increment,
     produto_id int not null,
     venda_id int not null,
-
+    quantidade int,
+    valor float,
     primary key(id),
     index (produto_id),
     index (venda_id),
