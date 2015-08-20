@@ -29,4 +29,18 @@ public class CadastroClienteController {
     return resultado;
   }
   
+  public boolean cadastrarAdmin(Usuario u) {
+    boolean resultado = false;
+    if (! u.getNome().isEmpty() && 
+        ! u.getEmail().isEmpty() &&
+        ! u.getSenha().isEmpty() &&
+        ! u.getCpf().isEmpty()) {
+      u.setTipo(1);
+      UsuarioEntity ue = new UsuarioEntity();
+      resultado = ue.inserir(u) != null;
+    }
+    
+    return resultado;
+  }
+  
 }

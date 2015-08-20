@@ -23,14 +23,18 @@ public class UsuarioEntity extends IEntity<Usuario> {
     super(tableName);
   }
     
-    
+  public Usuario buscarPorNome(String nome) {
+
+      String select = "select * from usuarios where nome='" + nome + "'";
+
+      return buscar(select);
+  }  
     
   public Usuario buscarPorCpf(String cpf) {
 
       String select = "select * from usuarios where cpf='" + cpf + "'";
 
       return buscar(select);
-
   }
 
   @Override

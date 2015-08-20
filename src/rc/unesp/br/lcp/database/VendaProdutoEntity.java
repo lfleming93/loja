@@ -14,7 +14,7 @@ import rc.unesp.br.lcp.beans.VendaProduto;
  * @author lfleming
  */
 public class VendaProdutoEntity extends IEntity<VendaProduto> {
-    public static String tableName = "produtos";
+    public static String tableName = "venda_produtos";
 
   public VendaProdutoEntity() {
     super(tableName);
@@ -31,6 +31,10 @@ public class VendaProdutoEntity extends IEntity<VendaProduto> {
             v.setVendaId(rs.getInt("venda_id"));
             
             v.setProdutoId(rs.getInt("produto_id"));
+            
+            v.setQuantidade(rs.getInt("quantidade"));
+            
+            v.setValor(rs.getFloat("valor"));
 
             return v;
         }
@@ -45,11 +49,12 @@ public class VendaProdutoEntity extends IEntity<VendaProduto> {
     @Override
     protected String converterEntidade(VendaProduto v) {
         String select = String.format(
-            "(venda_id, produto_id, quantidade)" +
-            " values (%d)",
+            "(venda_id, produto_id, quantidade, valor)" +
+            " values (%d, %d, %d, %f)",
             v.getVendaId(),
             v.getProdutoId(),
-            v.getQuantidade()
+            v.getQuantidade(),
+            v.getValor()
         );
         
         return select;
@@ -61,6 +66,7 @@ public class VendaProdutoEntity extends IEntity<VendaProduto> {
             "venda_id=%d " +
             "produto_id=%d " +
             "quantidade=%d " +
+            "valor=%f ",
             v.getVendaId(),       
             v.getProdutoId(),
             v.getQuantidade()

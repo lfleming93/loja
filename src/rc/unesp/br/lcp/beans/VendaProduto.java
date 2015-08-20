@@ -40,11 +40,17 @@ public class VendaProduto implements Entidade {
     }
 
     public Produto getProduto() {
-        return produto;
+        if (this.produto == null) {
+          ProdutoEntity pe = new ProdutoEntity();
+          this.produto = pe.buscarPorId(this.produtoId);
+        }
+          
+        return this.produto;
     }
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+        this.produtoId = produto.getId();
     }
     
     public void setProduto(int id) {
@@ -63,6 +69,7 @@ public class VendaProduto implements Entidade {
 
     public void setVenda(Venda venda) {
         this.venda = venda;
+        this.vendaId = venda.getId();
     }
     
     public void setVenda(int id) {
@@ -77,21 +84,25 @@ public class VendaProduto implements Entidade {
         
         return this.valor;
     }
+    
+    public void setValor(double valor) {
+      this.valor = valor;
+    }
 
-  public int getProdutoId() {
-    return produtoId;
-  }
+    public int getProdutoId() {
+        return produtoId;
+    }
 
-  public void setProdutoId(int produtoId) {
-    this.produtoId = produtoId;
-  }
+    public void setProdutoId(int produtoId) {
+        this.produtoId = produtoId;
+    }
 
-  public int getVendaId() {
-    return vendaId;
-  }
+    public int getVendaId() {
+        return this.vendaId;
+    }
 
-  public void setVendaId(int vendaId) {
-    this.vendaId = vendaId;
-  }
+    public void setVendaId(int vendaId) {
+       this.vendaId = vendaId;
+    }
        
 }

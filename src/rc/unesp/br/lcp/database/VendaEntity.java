@@ -17,7 +17,7 @@ import rc.unesp.br.lcp.beans.VendaProduto;
  * @author lfleming
  */
 public class VendaEntity extends IEntity<Venda> {
-    public static String tableName = "produtos";
+    public static String tableName = "vendas";
 
   public VendaEntity() {
     super(tableName);
@@ -29,6 +29,7 @@ public class VendaEntity extends IEntity<Venda> {
       
       VendaProdutoEntity vpEntity = new VendaProdutoEntity();
       for (VendaProduto vp : v.getProdutos()) {
+        vp.setVendaId(vendaSalva.getId());
         vendaSalva.setProduto(vpEntity.inserir(vp));
       }
       return vendaSalva;
@@ -53,7 +54,9 @@ public class VendaEntity extends IEntity<Venda> {
             
             v.setId(rs.getInt("id"));
             
-            v.setCliente(rs.getInt("cliente_id"));
+            v.setCliente(rs.getInt("usuario_id"));
+            
+            v.setValor(rs.getFloat("valor"));
 
             return v;
         }
@@ -68,9 +71,10 @@ public class VendaEntity extends IEntity<Venda> {
     @Override
     protected String converterEntidade(Venda v) {
         String select = String.format(
-            "(cliente_id)" +
-            " values (%d)",
-            v.getClienteId()
+            "(usuario_id, valor)" +
+            " values (%d, %f)",
+            v.getClienteId(),
+            v.getValor()
         );
         
         return select;
@@ -79,8 +83,10 @@ public class VendaEntity extends IEntity<Venda> {
     @Override
     protected String converterEntidadeUpdate(Venda v) {
         String select = String.format(
-            "cliente_id=%d " +
-            v.getClienteId()            
+            "usuario_id=%d " +
+            "valor=%f ",
+            v.getClienteId(),
+            v.getValor()
         );
                 
         
