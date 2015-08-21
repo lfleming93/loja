@@ -9,12 +9,14 @@ package rc.unesp.br.lcp.view;
  *
  * @author lfleming
  */
+import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class Main {
 
   public static void main(final String[] args) {
+     Locale.setDefault(Locale.ENGLISH);
     
     SwingUtilities.invokeLater(new Runnable() {
       @Override
