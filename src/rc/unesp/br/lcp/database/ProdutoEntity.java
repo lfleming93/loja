@@ -69,10 +69,10 @@ public class ProdutoEntity extends IEntity<Produto> {
     @Override
     protected String converterEntidadeUpdate(Produto p) {
         String select = String.format(
-            "nome='%s' " +
-            "categoria='%s' " +
-            "codigo='%s' " +
-            "quantidade=%d " +
+            "nome='%s', " +
+            "categoria='%s', " +
+            "codigo='%s', " +
+            "quantidade=%d, " +
             "valor=%f ",
             p.getNome(),
             p.getCategoria(),

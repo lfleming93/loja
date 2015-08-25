@@ -14,7 +14,7 @@ import rc.unesp.br.lcp.database.ProdutoEntity;
  */
 public class CadastroProdutoController {
   
-  public boolean cadastrarProduto(Produto p) {
+  public boolean cadastrarOuAtualizarProduto(Produto p) {
     boolean resultado = false;
     
     if (! p.getNome().isEmpty() && 
@@ -24,7 +24,12 @@ public class CadastroProdutoController {
         ! p.getCodigo().isEmpty()) {
       
       ProdutoEntity pe = new ProdutoEntity();
-      resultado = pe.inserir(p) != null;
+      
+      if (p.getId() == 0) {
+        resultado = pe.inserir(p) != null;
+      } else {
+        resultado = pe.atualizar(p) != 0;
+      }
     }
     
     

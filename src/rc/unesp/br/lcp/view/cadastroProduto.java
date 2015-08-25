@@ -21,6 +21,18 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
      */
     public cadastroProduto() {
         initComponents();
+        jLabel7.setVisible(false);
+    }
+    
+    public cadastroProduto(Produto p) {
+        initComponents();
+        jLabel7.setVisible(false);
+        jLabel7.setText(p.getId() + "");
+        jTxtNome.setText(p.getNome());
+        jTxtCodigo.setText(p.getCodigo());
+        jTxtValor.setText(p.getValor() + "");
+        jComboBox1.setSelectedItem(p.getCategoria());
+        jTxtQuantidade.setText(p.getQuantidade() + "");
     }
 
     /**
@@ -44,6 +56,7 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
     jLabel1 = new javax.swing.JLabel();
     jTxtCodigo = new javax.swing.JTextField();
     jTxtNome = new javax.swing.JTextField();
+    jLabel7 = new javax.swing.JLabel();
 
     setClosable(true);
 
@@ -62,7 +75,7 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
       }
     });
 
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Acessórios", "Alimentos", "Bebidas", "Higiene Pessoal", "Limpeza", "Outros", "Roupas", " ", " ", " " }));
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Acessórios", "Alimentos", "Bebidas", "Higiene Pessoal", "Limpeza", "Outros", "Roupas" }));
 
     jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel4.setText("Quantidade");
@@ -103,26 +116,23 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
+        .addGap(26, 26, 26)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addGap(26, 26, 26)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jLabel2)
-              .addComponent(jLabel3)
-              .addComponent(jLabel4)
-              .addComponent(jLabel5)
-              .addComponent(jLabel6))
-            .addGap(37, 37, 37)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jLabel1)
-              .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-          .addGroup(layout.createSequentialGroup()
-            .addGap(138, 138, 138)
-            .addComponent(jButton2)))
+          .addComponent(jLabel2)
+          .addComponent(jLabel3)
+          .addComponent(jLabel4)
+          .addComponent(jLabel5)
+          .addComponent(jLabel6)
+          .addComponent(jLabel7))
+        .addGap(37, 37, 37)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButton2)
+          .addComponent(jLabel1)
+          .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addContainerGap(31, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -151,7 +161,9 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
           .addComponent(jLabel6)
           .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-        .addComponent(jButton2)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jButton2)
+          .addComponent(jLabel7))
         .addGap(32, 32, 32))
     );
 
@@ -168,6 +180,10 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Produto p = new Produto();
+        
+        if (!jLabel7.getText().isEmpty()) {
+          p.setId(Integer.parseInt(jLabel7.getText()));
+        }
         
         String valor = jTxtValor.getText();
         if (valor.isEmpty()) {
@@ -187,12 +203,12 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
         
         CadastroProdutoController cc = new CadastroProdutoController();
         
-        if (cc.cadastrarProduto(p)) {
-          JOptionPane.showMessageDialog(rootPane, "Produto cadastrado com sucesso", 
+        if (cc.cadastrarOuAtualizarProduto(p)) {
+          JOptionPane.showMessageDialog(rootPane, "Produto salvo com sucesso", 
             "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
           this.setVisible(false);
         } else {
-          JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar, por favor preencha todos os campos",
+          JOptionPane.showMessageDialog(rootPane, "Erro ao salvar, por favor preencha todos os campos",
             "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -215,6 +231,7 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
   private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
   private javax.swing.JTextField jTxtCodigo;
   private javax.swing.JTextField jTxtNome;
   private javax.swing.JTextField jTxtQuantidade;
