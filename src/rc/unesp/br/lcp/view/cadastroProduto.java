@@ -83,7 +83,7 @@ public class cadastroProduto extends javax.swing.JInternalFrame {
     jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel5.setText("Categoria");
 
-    jButton2.setText("Cadastrar");
+    jButton2.setText("Salvar");
     jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton2ActionPerformed(evt);

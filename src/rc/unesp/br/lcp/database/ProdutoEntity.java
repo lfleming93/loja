@@ -7,6 +7,8 @@ package rc.unesp.br.lcp.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import rc.unesp.br.lcp.beans.Produto;
 
 /**
@@ -102,5 +104,22 @@ public class ProdutoEntity extends IEntity<Produto> {
       
       return result;
     }
+
+  public List<Produto> buscarProCategoria(String categoria) {
+    List<Produto> list = new ArrayList<>();
+        try {
+            String select = "select * from " + tableName + " where categoria='" + categoria + "'";
+            ResultSet rset = db.select(select);
+
+
+            while(rset.next()) {
+               list.add(converterResultSet(rset));
+            }
+        }
+        catch(Exception ex) {            
+            ex.printStackTrace();
+        }
+        return list;
+  }
     
 }

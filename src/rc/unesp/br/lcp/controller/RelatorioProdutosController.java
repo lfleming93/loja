@@ -18,10 +18,21 @@ import rc.unesp.br.lcp.database.ProdutoEntity;
 public class RelatorioProdutosController {
   
   public List<Object[]> getProdutosRelatorio() {
-    List<Object[]> result = new ArrayList<Object[]>();
     ProdutoEntity pe = new ProdutoEntity();
     List<Produto> produtos = pe.buscarTodos("categoria");
     
+    return getProdutos(produtos);
+  }
+
+  public List<Object[]> getProdutosRelatorio(String categoria) {
+    ProdutoEntity pe = new ProdutoEntity();
+    List<Produto> produtos = pe.buscarProCategoria(categoria);
+
+    return getProdutos(produtos);
+  }
+  
+  protected List<Object[]> getProdutos(List<Produto> produtos) {
+    List<Object[]> result = new ArrayList<>();
     for (Produto p : produtos) {
       result.add(new Object[]{
         p.getCodigo(),
