@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import rc.unesp.br.lcp.beans.Produto;
 import rc.unesp.br.lcp.beans.Venda;
 import rc.unesp.br.lcp.beans.VendaProduto;
 
@@ -27,10 +28,17 @@ public class VendaEntity extends IEntity<Venda> {
     public Venda inserir(Venda v) {
       Venda vendaSalva = super.inserir(v);
       
+      ProdutoEntity pe = new ProdutoEntity();
       VendaProdutoEntity vpEntity = new VendaProdutoEntity();
       for (VendaProduto vp : v.getProdutos()) {
+        Produto p = vp.getProduto();
+        
         vp.setVendaId(vendaSalva.getId());
         vendaSalva.setProduto(vpEntity.inserir(vp));
+        
+        p.setQuantidade(p.getQuantidade() - vp.getQuantidade());
+        pe.atualizar(p);
+        
       }
       return vendaSalva;
     }
