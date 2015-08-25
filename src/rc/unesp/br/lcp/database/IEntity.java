@@ -30,9 +30,13 @@ abstract class IEntity<T extends Entidade> {
     }
      
     public List<T> buscarTodos() {
+        return buscarTodos("id");
+    }
+    
+    public List<T> buscarTodos(String order) {
         List<T> list = new ArrayList<T>();
         try {
-            String select = "select * from " + tableName;
+            String select = "select * from " + tableName + " order by " + order;
             ResultSet rset = db.select(select);
 
 
@@ -93,7 +97,7 @@ abstract class IEntity<T extends Entidade> {
             
         try {
             
-            db.insert(select);
+            return db.update(select);
             
         }
         catch(Exception ex) {            

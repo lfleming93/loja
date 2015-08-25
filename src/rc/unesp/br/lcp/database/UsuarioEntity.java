@@ -36,6 +36,23 @@ public class UsuarioEntity extends IEntity<Usuario> {
 
       return buscar(select);
   }
+  
+  public List<Usuario> buscarTodosClientes() {
+    List<Usuario> list = new ArrayList<Usuario>();
+    try {
+      String select = "select * from " + tableName + " where tipo=0";
+      ResultSet rset = db.select(select);
+
+
+      while(rset.next()) {
+        list.add(converterResultSet(rset));
+      }
+    }
+    catch(Exception ex) {            
+      ex.printStackTrace();
+    }
+    return list;
+  }
 
   @Override
   protected Usuario converterResultSet(ResultSet rs) {
@@ -94,13 +111,13 @@ public class UsuarioEntity extends IEntity<Usuario> {
   @Override
   protected String converterEntidadeUpdate(Usuario u) {
       String select = String.format(
-          "nome='%s' " +
-          "email='%s' " +
-          "endereco='%s' " +
-          "cpf='%s' " +
-          "telefone='%s' " +
-          "celular='%s' " +
-          "tipo=%d " +
+          "nome='%s', " +
+          "email='%s', " +
+          "endereco='%s', " +
+          "cpf='%s', " +
+          "telefone='%s', " +
+          "celular='%s', " +
+          "tipo=%d, " +
           "senha='%s' ",
           u.getNome(),
           u.getEmail(),

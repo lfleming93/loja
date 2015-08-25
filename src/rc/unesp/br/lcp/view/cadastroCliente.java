@@ -21,6 +21,19 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
      */
     public cadastroCliente() {
         initComponents();
+        jLabel9.setVisible(false);
+    }
+    
+    public cadastroCliente(Usuario u) {
+        initComponents();
+        jLabel9.setVisible(false);
+        jLabel9.setText(u.getId() + "");
+        jTxtNome.setText(u.getNome());
+        jTxtEndereco.setText(u.getEndereco());
+        jTxtCelular.setText(u.getCelular());
+        jTxtCpf.setText(u.getCpf());
+        jTxtEmail.setText(u.getEmail());
+        jTxtTelefone.setText(u.getTelefone());
     }
 
     /**
@@ -51,6 +64,7 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     jTxtCelular = new javax.swing.JTextField();
     jLabel3 = new javax.swing.JLabel();
     jLabel8 = new javax.swing.JLabel();
+    jLabel9 = new javax.swing.JLabel();
 
     javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
     jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -109,7 +123,7 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
     jLabel1.setText("Cliente");
 
-    jButton2.setText("Cadastrar");
+    jButton2.setText("Salvar");
     jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton2ActionPerformed(evt);
@@ -128,7 +142,6 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
               .addGap(158, 158, 158)
@@ -151,7 +164,10 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
                 .addComponent(jTxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                   .addComponent(jButton2)
-                  .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                  .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9)
+            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap(72, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -185,9 +201,11 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
           .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(18, 18, 18)
         .addComponent(jButton2)
-        .addGap(30, 30, 30)
+        .addGap(26, 26, 26)
+        .addComponent(jLabel9)
+        .addGap(32, 32, 32)
         .addComponent(jLabel8)
-        .addContainerGap(27, Short.MAX_VALUE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
@@ -196,6 +214,10 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         Usuario u = new Usuario();
+        
+        if (!jLabel9.getText().isEmpty()) {
+          u.setId(Integer.parseInt(jLabel9.getText()));
+        }
         
         u.setNome(jTxtNome.getText());
         u.setEndereco(jTxtEndereco.getText());
@@ -206,7 +228,7 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
         
         CadastroClienteController cc = new CadastroClienteController();
         
-        if (cc.cadastrarCliente(u)) {
+        if (cc.cadastrarOuAtualizarCliente(u)) {
           JOptionPane.showMessageDialog(rootPane, "Cliente salvo com sucesso", 
             "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
           this.setVisible(false);
@@ -236,6 +258,7 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
   private javax.swing.JLabel jLabel6;
   private javax.swing.JLabel jLabel7;
   private javax.swing.JLabel jLabel8;
+  private javax.swing.JLabel jLabel9;
   private javax.swing.JTextField jTxtCelular;
   private javax.swing.JTextField jTxtCpf;
   private javax.swing.JTextField jTxtEmail;

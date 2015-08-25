@@ -14,7 +14,7 @@ import rc.unesp.br.lcp.database.UsuarioEntity;
  */
 public class CadastroClienteController {
   
-  public boolean cadastrarCliente(Usuario u) {
+  public boolean cadastrarOuAtualizarCliente(Usuario u) {
     boolean resultado = false;
     if (! u.getNome().isEmpty() && 
         ! u.getEmail().isEmpty() &&
@@ -23,7 +23,12 @@ public class CadastroClienteController {
         ! u.getCelular().isEmpty()) {
       
       UsuarioEntity ue = new UsuarioEntity();
-      resultado = ue.inserir(u) != null;
+      if (u.getId() == 0) {
+        resultado = ue.inserir(u) != null;
+      } else {
+        resultado = ue.atualizar(u) != 0;
+      }
+      
     }
     
     return resultado;

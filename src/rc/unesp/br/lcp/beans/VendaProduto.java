@@ -79,7 +79,7 @@ public class VendaProduto implements Entidade {
 
     public double getValor() {
         if (this.valor == 0.0) {
-            this.valor = this.produto.getValor() * quantidade;
+            this.valor = this.getProduto().getValor() * quantidade;
         }
         
         return this.valor;

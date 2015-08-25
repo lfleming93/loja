@@ -85,5 +85,22 @@ public class ProdutoEntity extends IEntity<Produto> {
         return select;
     }
     
+    public int quantidadeVendido(int id) {
+      int result = 0;
+      String select = "select sum(quantidade) as total from venda_produtos where produto_id="+id;
+      try {
+        ResultSet rset = db.select(select);
+
+
+        if(rset.next()) {
+           result = rset.getInt("total");
+        }
+      }
+      catch(Exception ex) {
+        ex.printStackTrace();
+      }
+      
+      return result;
+    }
     
 }

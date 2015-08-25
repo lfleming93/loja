@@ -7,6 +7,8 @@ package rc.unesp.br.lcp.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import rc.unesp.br.lcp.beans.VendaProduto;
 
 /**
@@ -20,6 +22,22 @@ public class VendaProdutoEntity extends IEntity<VendaProduto> {
     super(tableName);
   }
 
+    public List<VendaProduto> buscarTodosPorVenda(int venda_id) {
+      List<VendaProduto> list = new ArrayList<VendaProduto>();
+        try {
+            String select = "select * from " + tableName + " where venda_id= " + venda_id;
+            ResultSet rset = db.select(select);
+
+
+            while(rset.next()) {
+               list.add(converterResultSet(rset));
+            }
+        }
+        catch(Exception ex) {            
+            ex.printStackTrace();
+        }
+        return list;
+    }
         
     @Override
     protected VendaProduto converterResultSet(ResultSet rs) {

@@ -8,6 +8,7 @@ package rc.unesp.br.lcp.beans;
 import java.util.ArrayList;
 import java.util.List;
 import rc.unesp.br.lcp.database.UsuarioEntity;
+import rc.unesp.br.lcp.database.VendaProdutoEntity;
 
 /**
  *
@@ -72,7 +73,11 @@ public class Venda implements Entidade {
     }
 
     public List<VendaProduto> getProdutos() {
-        return produtos;
+        if (this.produtos == null) {
+          VendaProdutoEntity vp = new VendaProdutoEntity();
+          this.produtos = vp.buscarTodosPorVenda(this.getId());
+        }
+        return this.produtos;
     }
 
     public void setProduto(VendaProduto produto) {

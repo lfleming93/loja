@@ -68,6 +68,23 @@ public class VendaEntity extends IEntity<Venda> {
         
     }
     
+    public List<Venda> buscarTodosPorUsuario(int usuario_id) {
+      List<Venda> list = new ArrayList<Venda>();
+        try {
+            String select = "select * from " + tableName + " where usuario_id= " + usuario_id;
+            ResultSet rset = db.select(select);
+
+
+            while(rset.next()) {
+               list.add(converterResultSet(rset));
+            }
+        }
+        catch(Exception ex) {            
+            ex.printStackTrace();
+        }
+        return list;
+    }
+    
     @Override
     protected String converterEntidade(Venda v) {
         String select = String.format(

@@ -5,6 +5,8 @@
  */
 package rc.unesp.br.lcp.beans;
 
+import rc.unesp.br.lcp.database.ProdutoEntity;
+
 /**
  *
  * @author lfleming
@@ -62,6 +64,11 @@ public class Produto implements Entidade {
 
     public double getValor() {
         return valor;
+    }
+    
+    public int getQtdVendido() {
+      ProdutoEntity ue = new ProdutoEntity();
+      return ue.quantidadeVendido(this.id);
     }
 
     public void setValor(double valor) {
