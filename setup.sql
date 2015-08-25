@@ -2,7 +2,11 @@ create database if not exists loja;
 
 use loja;
 
+drop table if exists venda_produtos;
+drop table if exists vendas;
+drop table if exists produtos;
 drop table if exists usuarios;
+
 create table usuarios (
    id int not null auto_increment,
    nome varchar(50),
@@ -15,7 +19,6 @@ create table usuarios (
    senha varchar(50),
    primary key (id));
 
-drop table if exists produtos;
 create table produtos (
   id int not null auto_increment,
   nome varchar(50),
@@ -25,7 +28,6 @@ create table produtos (
   valor float,
   primary key (id));
 
-drop table if exists vendas;
 create table vendas (
   id int not null auto_increment,
   valor float,
@@ -36,7 +38,6 @@ create table vendas (
       references usuarios(id)
 );
 
-drop table if exists venda_produtos;
 create table venda_produtos (
     id int not null auto_increment,
     produto_id int not null,
