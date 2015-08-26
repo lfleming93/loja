@@ -43,6 +43,8 @@ public class EditarProduto extends javax.swing.JInternalFrame {
     jButton1 = new javax.swing.JButton();
     jComboBox1 = new javax.swing.JComboBox();
 
+    setClosable(true);
+
     jButton1.setText("Editar");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
