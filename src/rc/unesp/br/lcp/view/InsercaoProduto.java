@@ -8,7 +8,7 @@ package rc.unesp.br.lcp.view;
 import java.util.List;
 import javax.swing.JOptionPane;
 import rc.unesp.br.lcp.beans.Produto;
-import rc.unesp.br.lcp.database.ProdutoEntity;
+import rc.unesp.br.lcp.dao.ProdutoEntity;
 
 /**
  *

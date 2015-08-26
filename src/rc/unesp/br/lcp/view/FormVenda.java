@@ -11,8 +11,8 @@ import rc.unesp.br.lcp.beans.Produto;
 import rc.unesp.br.lcp.beans.Usuario;
 import rc.unesp.br.lcp.beans.Venda;
 import rc.unesp.br.lcp.beans.VendaProduto;
-import rc.unesp.br.lcp.database.UsuarioEntity;
-import rc.unesp.br.lcp.database.VendaEntity;
+import rc.unesp.br.lcp.dao.UsuarioEntity;
+import rc.unesp.br.lcp.dao.VendaEntity;
 
 /**
  *

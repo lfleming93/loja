@@ -5,7 +5,7 @@
  */
 package rc.unesp.br.lcp.beans;
 
-import rc.unesp.br.lcp.database.ProdutoEntity;
+import rc.unesp.br.lcp.dao.ProdutoEntity;
 
 /**
  *

@@ -8,7 +8,7 @@ package rc.unesp.br.lcp.view;
 import javax.swing.JOptionPane;
 import rc.unesp.br.lcp.beans.Usuario;
 import rc.unesp.br.lcp.controller.CadastroClienteController;
-import rc.unesp.br.lcp.database.UsuarioEntity;
+import rc.unesp.br.lcp.dao.UsuarioEntity;
 
 /**
  *

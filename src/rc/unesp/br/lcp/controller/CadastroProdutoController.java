@@ -6,7 +6,7 @@
 package rc.unesp.br.lcp.controller;
 
 import rc.unesp.br.lcp.beans.Produto;
-import rc.unesp.br.lcp.database.ProdutoEntity;
+import rc.unesp.br.lcp.dao.ProdutoEntity;
 
 /**
  *

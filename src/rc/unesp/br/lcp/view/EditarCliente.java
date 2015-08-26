@@ -9,7 +9,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import rc.unesp.br.lcp.beans.Usuario;
-import rc.unesp.br.lcp.database.UsuarioEntity;
+import rc.unesp.br.lcp.dao.UsuarioEntity;
 
 /**
  *

@@ -9,7 +9,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import rc.unesp.br.lcp.beans.Produto;
-import rc.unesp.br.lcp.database.ProdutoEntity;
+import rc.unesp.br.lcp.dao.ProdutoEntity;
 
 /**
  *

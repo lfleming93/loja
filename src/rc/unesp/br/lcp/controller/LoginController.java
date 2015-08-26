@@ -6,7 +6,7 @@
 package rc.unesp.br.lcp.controller;
 
 import rc.unesp.br.lcp.beans.Usuario;
-import rc.unesp.br.lcp.database.UsuarioEntity;
+import rc.unesp.br.lcp.dao.UsuarioEntity;
 
 /**
  *
